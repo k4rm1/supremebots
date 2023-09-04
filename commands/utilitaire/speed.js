@@ -34,14 +34,13 @@ if (pass === false) return message.channel.send(`Vous n'avez pas la permission d
 
 const m = await message.channel.send(`Chargement...`)
 
-const Embed = new Discord.MessageEmbed()
-.addField('**Ping**' , `${Math.round((m.createdTimestamp - message.createdTimestamp) - 40)}ms`, true)
-.addField('**Latence**' , `${Math.round((m.createdTimestamp - message.createdTimestamp) / 2)}ms`, true)
-.setFooter(footer)
-.setColor(color)
-await m.edit({ embeds: [Embed], content: "Chargement terminé"})
+await m.edit({ content: "Chargement terminé", embeds: [{
+        fields: [{name: "Latence", value: `${Math.round((m.createdTimestamp - message.createdTimestamp) - 40)}ms`}, {
+            name: "API", value: client.ws.ping+" ms!"
+        }], color: `${color}`, footer: `${footer}`
+}] })
        
        
 
-    }
-}
+    
+}}
